@@ -15,10 +15,16 @@ var gameHTML = document.getElementById("game");
 // reset game function
 function resetGame() {
   // reset game variables
-  losses++;
+  computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+  console.log("new guess:"+computerGuess);
   guessesLeft = 9;
   guessesSoFar = [];
 }
+
+// randomly pick a letter for the computer
+var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+console.log(computerGuess);
 
 // Here we take the guesses the user has tried -- then display it as letters separated by commas. 
 document.onkeydown = function (letter) {
@@ -46,16 +52,14 @@ document.onkeyup = function (event) {
   var userGuess = event.key;
   console.log(userGuess);
 
-  
-  // randomly pick a letter for the computer
-  var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-  console.log(computerGuess);
+
 
   // compare user's guess to the computer's guess and run with win/loss logic
   if (userGuess === computerGuess) {
     // you guess correctly
     wins++;
     resetGame();
+  
     
   } else if (userGuess !== computerGuess) {
     // you guess incorrectly
@@ -64,6 +68,8 @@ document.onkeyup = function (event) {
 
   if (guessesLeft === 0) {
     resetGame();
+    losses++;
+    
     
   }
 
